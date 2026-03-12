@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hub de Herramientas Docentes</title>
+
+<style>
+
+:root{
+--bg:#f5f7fb;
+--text:#333;
+--card:#ffffff;
+--header:#24292e;
+--accent:#0366d6;
+--control-bg:#ffffff;
+--control-text:#000;
+}
+
+.dark{
+--bg:#0f1116;
+--text:#e6edf3;
+--card:#161b22;
+--header:#161b22;
+--accent:#2f81f7;
+--control-bg:#21262d;
+--control-text:#e6edf3;
+}
+
+body{
+font-family:system-ui,sans-serif;
+margin:0;
+background:var(--bg);
+color:var(--text);
+transition:0.3s;
+}
+
+header{
+background:var(--header);
+color:white;
+padding:30px;
+text-align:center;
+position:relative;
+}
+
+.language-selector{
+position:absolute;
+top:20px;
+right:20px;
+}
+
+.theme-toggle{
+position:absolute;
+top:20px;
+left:20px;
+}
+
+select,button{
+background:var(--control-bg);
+color:var(--control-text);
+border:1px solid rgba(255,255,255,0.15);
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:var(--card);
+border-radius:12px;
+padding:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+transition:0.25s;
+text-align:center;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.icon{
+font-size:42px;
+margin-bottom:12px;
+}
+
+.card a{
+display:inline-block;
+margin-top:10px;
+background:var(--accent);
+color:white;
+padding:8px 14px;
+border-radius:6px;
+text-decoration:none;
+}
+
+footer{
+text-align:center;
+padding:30px;
+opacity:0.75;
+font-size:14px;
+}
+
+footer a{
+color:var(--accent);
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body class="dark">
+
+<header>
+
+<div class="theme-toggle">
+<button onclick="toggleTheme()">🌓</button>
+</div>
+
+<div class="language-selector">
+<select onchange="changeLang(this.value)" id="langSelect">
+<option value="es">Español</option>
+<option value="en">English</option>
+<option value="gl">Galego</option>
+</select>
+</div>
+
+<h1 data-i18n="title"></h1>
+<p data-i18n="subtitle"></p>
+
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">📡</div>
+<h3 data-i18n="channel_title"></h3>
+<p data-i18n="channel_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/channel-coding-demo/"></a>
+</div>
+
+<div class="card">
+<div class="icon">🔗</div>
+<h3 data-i18n="rdf_title"></h3>
+<p data-i18n="rdf_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/rdf-tools/"></a>
+</div>
+
+<div class="card">
+<div class="icon">🗜</div>
+<h3 data-i18n="lz77_title"></h3>
+<p data-i18n="lz77_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/lz77-demo/"></a>
+</div>
+
+<div class="card">
+<div class="icon">📈</div>
+<h3 data-i18n="dct_title"></h3>
+<p data-i18n="dct_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/dct-demo/"></a>
+</div>
+
+<div class="card">
+<div class="icon">🌳</div>
+<h3 data-i18n="huffman_title"></h3>
+<p data-i18n="huffman_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/huffman-demo/"></a>
+</div>
+
+<div class="card">
+<div class="icon">📦</div>
+<h3 data-i18n="lzw_title"></h3>
+<p data-i18n="lzw_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/lzw-demo/"></a>
+</div>
+
+<div class="card">
+<div class="icon">🎨</div>
+<h3 data-i18n="color_title"></h3>
+<p data-i18n="color_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/color-spaces/"></a>
+</div>
+
+<div class="card">
+<div class="icon">🎛</div>
+<h3 data-i18n="conv_title"></h3>
+<p data-i18n="conv_desc"></p>
+<a data-i18n="open" href="https://valentinbarral.github.io/convolution-demo/"></a>
+</div>
+
+</div>
+</div>
+
+<footer>
+© 2026 Valentín Barral  
+<br>
+Licencia:  
+<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
+Creative Commons Attribution 4.0 (CC BY)
+</a>
+</footer>
+
+<script>
+
+const translations={
+
+es:{
+title:"Hub de Herramientas Docentes",
+subtitle:"Demos interactivas para procesado de señal, compresión y comunicaciones",
+
+channel_title:"Codificación de Canal",
+channel_desc:"Demo interactiva sobre codificación de canal y corrección de errores.",
+
+rdf_title:"Herramientas RDF",
+rdf_desc:"Utilidades para trabajar con datos RDF y tecnologías de la web semántica.",
+
+lz77_title:"Compresión LZ77",
+lz77_desc:"Visualización del algoritmo de compresión LZ77.",
+
+dct_title:"Transformada Discreta del Coseno",
+dct_desc:"Explicación interactiva de la transformada usada en compresión de imágenes.",
+
+huffman_title:"Codificación Huffman",
+huffman_desc:"Demostración visual de la codificación de Huffman.",
+
+lzw_title:"Compresión LZW",
+lzw_desc:"Visualización interactiva del algoritmo de compresión LZW.",
+
+color_title:"Espacios de Color",
+color_desc:"Explora las relaciones entre distintos espacios de color.",
+
+conv_title:"Convolución",
+conv_desc:"Demostración interactiva de la convolución en señales e imágenes.",
+
+open:"Abrir"
+},
+
+en:{
+title:"Teaching Tools Hub",
+subtitle:"Interactive demos for signal processing, compression and communications",
+
+channel_title:"Channel Coding",
+channel_desc:"Interactive demo for channel coding and error correction.",
+
+rdf_title:"RDF Tools",
+rdf_desc:"Utilities for working with RDF data and semantic web technologies.",
+
+lz77_title:"LZ77 Compression",
+lz77_desc:"Visualization of the LZ77 compression algorithm.",
+
+dct_title:"Discrete Cosine Transform",
+dct_desc:"Interactive explanation of the Discrete Cosine Transform used in image compression.",
+
+huffman_title:"Huffman Coding",
+huffman_desc:"Visual demonstration of Huffman entropy coding.",
+
+lzw_title:"LZW Compression",
+lzw_desc:"Interactive visualization of the LZW compression algorithm.",
+
+color_title:"Color Spaces",
+color_desc:"Explore relationships between digital color spaces.",
+
+conv_title:"Convolution",
+conv_desc:"Interactive convolution demonstration for signals and images.",
+
+open:"Open"
+},
+
+gl:{
+title:"Hub de Ferramentas Docentes",
+subtitle:"Demos interactivas para procesado de sinal, compresión e comunicacións",
+
+channel_title:"Codificación de Canal",
+channel_desc:"Demo interactiva sobre codificación de canal e corrección de erros.",
+
+rdf_title:"Ferramentas RDF",
+rdf_desc:"Utilidades para traballar con datos RDF e tecnoloxías da web semántica.",
+
+lz77_title:"Compresión LZ77",
+lz77_desc:"Visualización do algoritmo de compresión LZ77.",
+
+dct_title:"Transformada Discreta do Coseno",
+dct_desc:"Explicación interactiva da transformada usada na compresión de imaxes.",
+
+huffman_title:"Codificación Huffman",
+huffman_desc:"Demostración visual da codificación de Huffman.",
+
+lzw_title:"Compresión LZW",
+lzw_desc:"Visualización interactiva do algoritmo de compresión LZW.",
+
+color_title:"Espazos de Cor",
+color_desc:"Explora relacións entre distintos espazos de cor.",
+
+conv_title:"Convolución",
+conv_desc:"Demostración interactiva da convolución en sinais e imaxes.",
+
+open:"Abrir"
+}
+
+};
+
+function changeLang(lang){
+localStorage.setItem("lang",lang);
+
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.dataset.i18n;
+el.innerText=translations[lang][key];
+});
+}
+
+function toggleTheme(){
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"theme",
+document.body.classList.contains("dark")?"dark":"light"
+);
+}
+
+function init(){
+
+const lang=localStorage.getItem("lang") || "es";
+changeLang(lang);
+document.getElementById("langSelect").value=lang;
+
+const theme=localStorage.getItem("theme") || "dark";
+
+if(theme==="dark")
+document.body.classList.add("dark");
+
+}
+
+init();
+
+</script>
+
+</body>
+</html>
