@@ -12,10 +12,11 @@
 --bg:#f5f7fb;
 --text:#333;
 --card:#ffffff;
---header:#24292e;
+--header:#ffffff;
+--header-text:#24292e;
 --accent:#0366d6;
---control-bg:#ffffff;
---control-text:#000;
+--control-bg:#f0f2f5;
+--control-text:#24292e;
 }
 
 .dark{
@@ -23,6 +24,7 @@
 --text:#e6edf3;
 --card:#161b22;
 --header:#161b22;
+--header-text:#e6edf3;
 --accent:#2f81f7;
 --control-bg:#21262d;
 --control-text:#e6edf3;
@@ -38,22 +40,32 @@ transition:0.3s;
 
 header{
 background:var(--header);
-color:white;
-padding:30px;
-text-align:center;
+color:var(--header-text);
+padding:12px 16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 position:relative;
+box-shadow:0 1px 4px rgba(0,0,0,0.08);
 }
 
-.language-selector{
-position:absolute;
-top:20px;
-right:20px;
+header h1{
+font-size:clamp(1rem,4.5vw,2em);
+margin:0;
+flex:1;
+text-align:center;
 }
 
-.theme-toggle{
-position:absolute;
-top:20px;
-left:20px;
+.hamburger{
+display:flex;
+background:var(--control-bg);
+color:var(--control-text);
+border:1px solid rgba(255,255,255,0.15);
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
+font-size:1.3em;
+line-height:1;
 }
 
 select,button{
@@ -63,6 +75,59 @@ border:1px solid rgba(255,255,255,0.15);
 padding:6px 10px;
 border-radius:6px;
 cursor:pointer;
+}
+
+.header-controls{
+display:none;
+position:absolute;
+top:100%;
+left:0;
+background:var(--header);
+padding:12px;
+border-radius:0 0 8px 8px;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+flex-direction:column;
+gap:10px;
+z-index:100;
+min-width:160px;
+}
+
+.header-controls.open{
+display:flex;
+}
+
+@media(min-width:600px){
+header{
+padding:16px 30px;
+justify-content:center;
+}
+header h1{
+font-size:2em;
+flex:none;
+}
+.hamburger{
+display:none;
+}
+.header-controls{
+display:block;
+position:static;
+background:none;
+padding:0;
+box-shadow:none;
+min-width:0;
+}
+.theme-toggle{
+position:absolute;
+top:50%;
+left:20px;
+transform:translateY(-50%);
+}
+.language-selector{
+position:absolute;
+top:50%;
+right:20px;
+transform:translateY(-50%);
+}
 }
 
 .container{
@@ -84,25 +149,17 @@ padding:25px;
 box-shadow:0 5px 15px rgba(0,0,0,0.08);
 transition:0.25s;
 text-align:center;
+cursor:pointer;
 }
 
 .card:hover{
 transform:translateY(-6px);
+box-shadow:0 0 0 2px var(--accent),0 5px 15px rgba(0,0,0,0.08);
 }
 
 .icon{
 font-size:42px;
 margin-bottom:12px;
-}
-
-.card a{
-display:inline-block;
-margin-top:10px;
-background:var(--accent);
-color:white;
-padding:8px 14px;
-border-radius:6px;
-text-decoration:none;
 }
 
 footer{
@@ -124,10 +181,14 @@ text-decoration:none;
 
 <header>
 
+<button class="hamburger" onclick="toggleMenu()" aria-label="Menú">☰</button>
+
+<h1 data-i18n="title"></h1>
+
+<nav class="header-controls">
 <div class="theme-toggle">
 <button onclick="toggleTheme()">🌓</button>
 </div>
-
 <div class="language-selector">
 <select onchange="changeLang(this.value)" id="langSelect">
 <option value="es">Español</option>
@@ -135,9 +196,7 @@ text-decoration:none;
 <option value="gl">Galego</option>
 </select>
 </div>
-
-<h1 data-i18n="title"></h1>
-<p data-i18n="subtitle"></p>
+</nav>
 
 </header>
 
@@ -145,60 +204,52 @@ text-decoration:none;
 
 <div class="grid">
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/channel-coding-demo/'">
 <div class="icon">📡</div>
 <h3 data-i18n="channel_title"></h3>
 <p data-i18n="channel_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/channel-coding-demo/"></a>
 </div>
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/rdf-tools/'">
 <div class="icon">🔗</div>
 <h3 data-i18n="rdf_title"></h3>
 <p data-i18n="rdf_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/rdf-tools/"></a>
 </div>
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/lz77-demo/'">
 <div class="icon">🗜</div>
 <h3 data-i18n="lz77_title"></h3>
 <p data-i18n="lz77_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/lz77-demo/"></a>
 </div>
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/dct-demo/'">
 <div class="icon">📈</div>
 <h3 data-i18n="dct_title"></h3>
 <p data-i18n="dct_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/dct-demo/"></a>
 </div>
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/huffman-demo/'">
 <div class="icon">🌳</div>
 <h3 data-i18n="huffman_title"></h3>
 <p data-i18n="huffman_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/huffman-demo/"></a>
 </div>
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/lzw-demo/'">
 <div class="icon">📦</div>
 <h3 data-i18n="lzw_title"></h3>
 <p data-i18n="lzw_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/lzw-demo/"></a>
 </div>
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/color-spaces/'">
 <div class="icon">🎨</div>
 <h3 data-i18n="color_title"></h3>
 <p data-i18n="color_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/color-spaces/"></a>
 </div>
 
-<div class="card">
+<div class="card" onclick="location.href='https://valentinbarral.github.io/convolution-demo/'">
 <div class="icon">🎛</div>
 <h3 data-i18n="conv_title"></h3>
 <p data-i18n="conv_desc"></p>
-<a data-i18n="open" href="https://valentinbarral.github.io/convolution-demo/"></a>
 </div>
 
 </div>
@@ -218,8 +269,7 @@ Creative Commons Attribution 4.0 (CC BY)
 const translations={
 
 es:{
-title:"Hub de Herramientas Docentes",
-subtitle:"Demos interactivas para procesado de señal, compresión y comunicaciones",
+title:"Hub de herramientas docentes",
 
 channel_title:"Codificación de Canal",
 channel_desc:"Demo interactiva sobre codificación de canal y corrección de errores.",
@@ -250,7 +300,6 @@ open:"Abrir"
 
 en:{
 title:"Teaching Tools Hub",
-subtitle:"Interactive demos for signal processing, compression and communications",
 
 channel_title:"Channel Coding",
 channel_desc:"Interactive demo for channel coding and error correction.",
@@ -280,8 +329,7 @@ open:"Open"
 },
 
 gl:{
-title:"Hub de Ferramentas Docentes",
-subtitle:"Demos interactivas para procesado de sinal, compresión e comunicacións",
+title:"Hub de ferramentas docentes",
 
 channel_title:"Codificación de Canal",
 channel_desc:"Demo interactiva sobre codificación de canal e corrección de erros.",
@@ -329,6 +377,18 @@ localStorage.setItem(
 document.body.classList.contains("dark")?"dark":"light"
 );
 }
+
+function toggleMenu(){
+document.querySelector(".header-controls").classList.toggle("open");
+}
+
+document.addEventListener("click",e=>{
+const ctrl=document.querySelector(".header-controls");
+const burger=document.querySelector(".hamburger");
+if(ctrl.classList.contains("open") && !ctrl.contains(e.target) && e.target!==burger){
+ctrl.classList.remove("open");
+}
+});
 
 function init(){
 
